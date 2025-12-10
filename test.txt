@@ -3,7 +3,7 @@
   <head>
     <meta charset = "utf-8">
     <title>Star's</title>
-    <link rel="icon" href="icon.png">
+    <link rel="icon" href="sm.png">
   </head>
   <body>
       hello world
