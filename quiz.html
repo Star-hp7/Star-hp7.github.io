@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Harry Potter Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>選擇最符合你的選項</h1>
+  <form id="quizForm">
+    
+    <div class="question">
+      <h2>1. 如果朋友遇到困難，你會怎麼做？</h2>
+      <label><input type="radio" name="q1" value="harry"> 立刻衝上前幫忙</label>
+      <label><input type="radio" name="q1" value="hermione"> 先想辦法分析問題，再行動</label>
+      <label><input type="radio" name="q1" value="ron"> 幽默安慰朋友，讓氣氛輕鬆</label>
+      <label><input type="radio" name="q1" value="hagrid"> 用溫暖的方式支持朋友</label>
+    </div>
+
+    <div class="question">
+      <h2>2. 你在團體中常扮演的角色？</h2>
+      <label><input type="radio" name="q2" value="hermione"> 智囊/領導者</label>
+      <label><input type="radio" name="q2" value="fredgeorge"> 壓力釋放者/士氣維持者</label>
+      <label><input type="radio" name="q2" value="draco"> 衝突製造者/防禦型</label>
+      <label><input type="radio" name="q2" value="luna"> 提供不同觀點/提醒價值</label>
+    </div>
+
+    <div class="question">
+      <h2>3. 你的處事風格？</h2>
+      <label><input type="radio" name="q3" value="harry"> 衝動行動型</label>
+      <label><input type="radio" name="q3" value="ron"> 隨性 chill 型</label>
+      <label><input type="radio" name="q3" value="sirius"> 瀟灑自由型</label>
+      <label><input type="radio" name="q3" value="draco"> 計算防禦型</label>
+    </div>
+
+    <div class="question">
+      <h2>4. 你最重視什麼？</h2>
+      <label><input type="radio" name="q4" value="ginny"> 愛與勇氣</label>
+      <label><input type="radio" name="q4" value="snape"> 忠誠與責任</label>
+      <label><input type="radio" name="q4" value="dumbledore"> 智慧與策略</label>
+      <label><input type="radio" name="q4" value="voldemort"> 權力與掌控</label>
+    </div>
+
+    <div class="question">
+      <h2>5. 你的個性特質？</h2>
+      <label><input type="radio" name="q5" value="luna"> 獨特且自我認同高</label>
+      <label><input type="radio" name="q5" value="fredgeorge"> 幽默且照顧他人</label>
+      <label><input type="radio" name="q5" value="hagrid"> 溫暖且保護他人</label>
+      <label><input type="radio" name="q5" value="hermione"> 理性且努力</label>
+    </div>
+
+    <button type="button" id="submitBtn">看結果</button>
+  </form>
+</div>
+
+<script src="js/quiz.js"></script>
+</body>
+</html>
