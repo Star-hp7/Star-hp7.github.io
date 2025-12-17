@@ -1,11 +1,70 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset = "utf-8">
-    <title>Star's</title>
-    <link rel="icon" href="sm.png">
-  </head>
-  <body>
-      hello world
-  </body>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Which Harry Potter Character Are You?</title>
+</head>
+<body>
+
+  <h1>你在團體中扮演什麼角色？</h1>
+  <p>請選出最接近你的選項</p>
+
+  <!-- Question 1 -->
+  <h3>團體作業快來不及時，你通常會：</h3>
+  <input type="radio" name="q1" value="hermione"> 接手並開始規劃解法<br>
+  <input type="radio" name="q1" value="fred"> 試著緩和氣氛，讓大家不要崩潰<br>
+  <input type="radio" name="q1" value="snape"> 默默把問題補起來，不一定會說<br>
+
+  <br>
+
+  <!-- Question 2 -->
+  <h3>在團體中，你比較常被形容為：</h3>
+  <input type="radio" name="q2" value="hermione"> 理性又可靠<br>
+  <input type="radio" name="q2" value="fred"> 有趣、帶動氣氛<br>
+  <input type="radio" name="q2" value="snape"> 安靜但很有存在感<br>
+
+  <br><br>
+
+  <button onclick="showResult()">看結果</button>
+
+  <h2 id="result"></h2>
+
+  <script>
+    function showResult() {
+      let scores = {
+        hermione: 0,
+        fred: 0,
+        snape: 0
+      };
+
+      let q1 = document.querySelector('input[name="q1"]:checked');
+      let q2 = document.querySelector('input[name="q2"]:checked');
+
+      if (!q1 || !q2) {
+        document.getElementById("result").innerText = "你有題目沒選完。人生可以模糊，作業不行。";
+        return;
+      }
+
+      scores[q1.value]++;
+      scores[q2.value]++;
+
+      let result = Object.keys(scores).reduce((a, b) =>
+        scores[a] > scores[b] ? a : b
+      );
+
+      let text = "";
+
+      if (result === "hermione") {
+        text = "你是妙麗：外在理性冷靜，內心其實壓力山大，在團體中是核心支柱型角色。";
+      } else if (result === "fred") {
+        text = "你是弗雷／喬治：外在搞笑，內心敏感，團體中的情緒穩定器。";
+      } else {
+        text = "你是石內卜：外表嚴肅疏離，內心情感深沉，習慣在背後承擔。";
+      }
+
+      document.getElementById("result").innerText = text;
+    }
+  </script>
+
+</body>
 </html>
