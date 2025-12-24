@@ -1,6 +1,3 @@
-const quizForm = document.getElementById('quizForm');
-const submitBtn = document.getElementById('submitBtn');
-
 const characters = {
   harry:{name:"Harry Potter",image:"images/harry.png",analysis:["團體中的行動核心","Gryffindor","外在衝動、內在義氣勇氣","你可以看齊：勇於做對的選擇"]},
   hermione:{name:"Hermione Granger",image:"images/hermione.png",analysis:["團體中的智囊 / 領導者","Gryffindor / Ravenclaw","外在理性、內在責任焦慮","你可以看齊：不因出身限制自己"]},
@@ -16,9 +13,14 @@ const characters = {
   ginny:{name:"Ginny Weasley",image:"images/ginny.png",analysis:["行動者","Gryffindor","外在勇敢、敢愛敢恨","你可以看齊：勇於表達"]},
 };
 
-// === 測驗頁邏輯 ===
-if (submitBtn) {
-  submitBtn.addEventListener('click', () => {
+// =======================
+// 測驗頁 quiz.html 才跑
+// =======================
+const quizForm = document.getElementById("quizForm");
+const submitBtn = document.getElementById("submitBtn");
+
+if (quizForm && submitBtn) {
+  submitBtn.addEventListener("click", () => {
     const formData = new FormData(quizForm);
     const scores = {};
 
@@ -31,14 +33,19 @@ if (submitBtn) {
       return;
     }
 
-    let resultKey = Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
+    let resultKey = Object.keys(scores)
+      .reduce((a, b) => scores[a] > scores[b] ? a : b);
+
     localStorage.setItem("hpResult", resultKey);
     window.location.href = "result.html";
   });
 }
 
-// === 結果頁邏輯 ===
+// =======================
+// 結果頁 result.html 才跑
+// =======================
 const resultContainer = document.getElementById("characterResult");
+
 if (resultContainer) {
   const key = localStorage.getItem("hpResult");
   const c = characters[key];
@@ -46,6 +53,6 @@ if (resultContainer) {
   resultContainer.innerHTML = c ? `
     <h2>${c.name}</h2>
     <img src="${c.image}" style="max-width:300px;border-radius:16px;">
-    <ul>${c.analysis.map(i=>`<li>${i}</li>`).join("")}</ul>
+    <ul>${c.analysis.map(i => `<li>${i}</li>`).join("")}</ul>
   ` : "<p>沒有結果，你可能把世界線搞壞了。</p>";
 }
