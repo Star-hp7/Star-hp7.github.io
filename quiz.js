@@ -47,3 +47,21 @@ submitBtn.addEventListener('click', () => {
   // 🔥 跳到結果頁
   window.location.href = "result.html";
 });
+
+// 只有在 result.html 才會執行
+if (resultContainer) {
+  const resultKey = localStorage.getItem("hpResult");
+  const character = characters[resultKey];
+
+  if (!character) {
+    resultContainer.innerHTML = "<p>找不到結果，你是不是亂來。</p>";
+  } else {
+    resultContainer.innerHTML = `
+      <h2>${character.name}</h2>
+      <img src="${character.image}" style="max-width:300px;border-radius:16px;">
+      <ul>
+        ${character.analysis.map(a => `<li>${a}</li>`).join("")}
+      </ul>
+    `;
+  }
+}
