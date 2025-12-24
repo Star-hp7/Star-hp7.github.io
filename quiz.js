@@ -17,32 +17,33 @@ const characters = {
   ginny:{name:"Ginny Weasley",image:"images/ginny.png",analysis:["行動者 / 團體動力","Gryffindor","外在勇敢、敢愛敢恨","你可以看齊：勇於表達與行動"]}
 };
 
-submitBtn.addEventListener('click',()=>{
+submitBtn.addEventListener('click', () => {
   const formData = new FormData(quizForm);
   const scores = {};
-  for(let value of formData.values()){
-    if(!scores[value]) scores[value]=0;
+
+  for (let value of formData.values()) {
+    if (!scores[value]) scores[value] = 0;
     scores[value]++;
   }
-  let maxScore=0;
-  let resultKey=null;
-  for(let key in scores){
-    if(scores[key]>maxScore){
-      maxScore=scores[key];
-      resultKey=key;
-    }
-  }
-  if(!resultKey){
-    alert("請先回答所有問題！");
+
+  if (Object.keys(scores).length === 0) {
+    alert("你至少要選幾題吧，別這麼叛逆");
     return;
   }
-  const character=characters[resultKey];
-  resultContainer.innerHTML=`
-    <h2>${character.name}</h2>
-    <img src="${character.image}" alt="${character.name}" style="max-width:300px;border-radius:16px;">
-    <ul>
-      ${character.analysis.map(a=>`<li>${a}</li>`).join('')}
-    </ul>
-  `;
-  window.scrollTo(0,0);
+
+  let maxScore = 0;
+  let resultKey = null;
+
+  for (let key in scores) {
+    if (scores[key] > maxScore) {
+      maxScore = scores[key];
+      resultKey = key;
+    }
+  }
+
+  // 🔥 把結果存起來
+  localStorage.setItem("hpResult", resultKey);
+
+  // 🔥 跳到結果頁
+  window.location.href = "result.html";
 });
