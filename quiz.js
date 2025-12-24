@@ -1,20 +1,65 @@
 const characters = {
-  harry:{name:"Harry Potter",image:"images/harry.png",analysis:["團體中的行動核心","Gryffindor","外在衝動、內在義氣勇氣","你可以看齊：勇於做對的選擇"]},
-  hermione:{name:"Hermione Granger",image:"images/hermione.png",analysis:["團體中的智囊 / 領導者","Gryffindor / Ravenclaw","外在理性、內在責任焦慮","你可以看齊：不因出身限制自己"]},
-  ron:{name:"Ron Weasley",image:"images/ron.png",analysis:["團體氣氛製造者","Gryffindor","外在隨性、內在自我懷疑","你可以看齊：即使不自信仍選擇陪伴"]},
-  draco:{name:"Draco Malfoy",image:"images/draco.png",analysis:["防禦型角色","Slytherin","外在尖銳、內在恐懼","你可以看齊：承認脆弱"]},
-  luna:{name:"Luna Lovegood",image:"images/luna.png",analysis:["價值提醒者","Ravenclaw","外在怪異、內在穩定","你可以看齊：忠於自己"]},
-  fredgeorge:{name:"Fred & George",image:"images/fredgeorge.png",analysis:["團體士氣核心","Gryffindor","外在胡鬧、內在溫柔","你可以看齊：用幽默承接世界"]},
-  snape:{name:"Severus Snape",image:"images/snape.png",analysis:["幕後守護者","Slytherin","外在冷漠、內在深情","你可以看齊：選擇比表現重要"]},
-  hagrid:{name:"Hagrid",image:"images/hagrid.png",analysis:["團體守護者","Gryffindor","外在巨大、內在溫柔","你可以看齊：用行動照顧他人"]},
-  dumbledore:{name:"Dumbledore",image:"images/dumbledore.png",analysis:["智慧領導","Gryffindor","外在慈祥、內在深謀","你可以看齊：用智慧而非控制"]},
-  voldemort:{name:"Voldemort",image:"images/voldemort.png",analysis:["極端對照角色","Slytherin","外在魅力、內在空洞","你可以看齊：理解權力的代價"]},
-  sirius:{name:"Sirius Black",image:"images/sirius.png",analysis:["自由靈魂","Gryffindor","外在瀟灑、內在忠誠","你可以看齊：不被體制磨掉靈魂"]},
-  ginny:{name:"Ginny Weasley",image:"images/ginny.png",analysis:["行動者","Gryffindor","外在勇敢、敢愛敢恨","你可以看齊：勇於表達"]},
+  harry: {
+    name: "Harry Potter",
+    house: "Gryffindor",
+    houseImage: "images/gryffindor.png",
+    image: "images/harry.png",
+    analysis: {
+      role: "團體中的行動核心",
+      personality: "外在衝動、不太在乎規則，但對朋友極度重情重義。",
+      inside: "在關鍵時刻，即使內心害怕，仍選擇站到最前面承擔風險。",
+      learnTitle: "在恐懼中仍選擇行動",
+      learnContent: "你可以向 Harry 學習：勇氣不是不害怕，而是在害怕時仍願意做正確的事。"
+    }
+  },
+
+  hermione: {
+    name: "Hermione Granger",
+    house: "Gryffindor / Ravenclaw",
+    houseImage: "images/gryffindor.png",
+    image: "images/hermione.png",
+    analysis: {
+      role: "團體中的智囊與領導者",
+      personality: "外在理性冷靜，對自己要求極高。",
+      inside: "內心承擔龐大的責任感，害怕失誤卻仍不斷前進。",
+      learnTitle: "不因出身限制自己",
+      learnContent: "你可以向 Hermione 看齊：努力與智慧能打破任何標籤。"
+    }
+  },
+
+  ron: {
+    name: "Ron Weasley",
+    house: "Gryffindor",
+    houseImage: "images/gryffindor.png",
+    image: "images/ron.png",
+    analysis: {
+      role: "團體中的情緒緩衝者",
+      personality: "外在隨性幽默，看似不在乎。",
+      inside: "其實內心容易自我懷疑，但仍選擇陪伴朋友。",
+      learnTitle: "即使不自信仍選擇陪伴",
+      learnContent: "你可以向 Ron 學習：重要的不是完美，而是願意留下來。"
+    }
+  },
+
+  luna: {
+    name: "Luna Lovegood",
+    house: "Ravenclaw",
+    houseImage: "images/ravenclaw.png",
+    image: "images/luna.png",
+    analysis: {
+      role: "價值觀提醒者",
+      personality: "外在獨特、不被理解。",
+      inside: "內心穩定，對自我有高度認同。",
+      learnTitle: "忠於自己",
+      learnContent: "你可以向 Luna 看齊：不急著被世界理解。"
+    }
+  },
+
+  // 其他角色你可以照這個模板「複製貼上改文字」
 };
 
 // =======================
-// 測驗頁 quiz.html 才跑
+// 測驗頁
 // =======================
 const quizForm = document.getElementById("quizForm");
 const submitBtn = document.getElementById("submitBtn");
@@ -29,11 +74,11 @@ if (quizForm && submitBtn) {
     }
 
     if (Object.keys(scores).length === 0) {
-      alert("你至少選一題啦，不要測空氣");
+      alert("至少選一題啦 🙃");
       return;
     }
 
-    let resultKey = Object.keys(scores)
+    const resultKey = Object.keys(scores)
       .reduce((a, b) => scores[a] > scores[b] ? a : b);
 
     localStorage.setItem("hpResult", resultKey);
@@ -42,7 +87,7 @@ if (quizForm && submitBtn) {
 }
 
 // =======================
-// 結果頁 result.html 才跑
+// 結果頁
 // =======================
 const resultContainer = document.getElementById("characterResult");
 
@@ -50,9 +95,21 @@ if (resultContainer) {
   const key = localStorage.getItem("hpResult");
   const c = characters[key];
 
-  resultContainer.innerHTML = c ? `
-    <h2>${c.name}</h2>
-    <img src="${c.image}" style="max-width:300px;border-radius:16px;">
-    <ul>${c.analysis.map(i => `<li>${i}</li>`).join("")}</ul>
-  ` : "<p>沒有結果，你可能把世界線搞壞了。</p>";
+  if (!c) {
+    resultContainer.innerHTML = "<p>沒有結果，世界線出問題。</p>";
+  } else {
+    resultContainer.innerHTML = `
+      <img src="${c.houseImage}" style="max-width:200px;margin-bottom:20px;">
+      <h2>${c.name}</h2>
+      <img src="${c.image}" style="max-width:300px;border-radius:16px;margin:20px 0;">
+
+      <div class="card"><strong>團體角色</strong><p>${c.analysis.role}</p></div>
+      <div class="card"><strong>外在表現</strong><p>${c.analysis.personality}</p></div>
+      <div class="card"><strong>內在狀態</strong><p>${c.analysis.inside}</p></div>
+      <div class="card highlight">
+        <strong>👉 你可以向他看齊的地方：${c.analysis.learnTitle}</strong>
+        <p>${c.analysis.learnContent}</p>
+      </div>
+    `;
+  }
 }
