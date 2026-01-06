@@ -1,160 +1,83 @@
-// =======================
-// 有分析內容的角色（只有這些可以當最終結果）
-// =======================
 const characters = {
   harry: {
     name: "Harry Potter",
-    house: "gryffindor",
-    houseImage: "images/gryffindor.png",
-    image: "images/harry.png",
-    analysis: {
-      role: "團體中的行動核心",
-      personality: "外在衝動、不太在乎規則，但對朋友極度重情重義。",
-      inside: "在關鍵時刻，即使內心害怕，仍選擇站到最前面承擔風險。",
-      learnTitle: "在恐懼中仍選擇行動",
-      learnContent: "勇氣不是不害怕，而是在害怕時仍願意做正確的事。"
-    }
+    house: "Gryffindor",
+    analysis: "你傾向在關鍵時刻挺身而出，即使害怕也願意承擔風險。你重視正義與友情，行動常快於思考，但你的初心很純粹。"
   },
   hermione: {
     name: "Hermione Granger",
-    house: "gryffindor",
-    houseImage: "images/gryffindor.png",
-    image: "images/hermione.png",
-    analysis: {
-      role: "團體中的智囊",
-      personality: "理性、嚴謹、對自己要求極高。",
-      inside: "害怕犯錯，但仍選擇承擔責任。",
-      learnTitle: "知識是力量",
-      learnContent: "努力與智慧能突破出身限制。"
-    }
+    house: "Gryffindor",
+    analysis: "你理性、努力，遇到問題會先思考再行動。你相信知識能帶來改變，也願意為正確的事承擔責任。"
   },
   ron: {
     name: "Ron Weasley",
-    house: "gryffindor",
-    houseImage: "images/gryffindor.png",
-    image: "images/ron.png",
-    analysis: {
-      role: "情緒支持者",
-      personality: "幽默、隨性。",
-      inside: "其實很容易自我懷疑。",
-      learnTitle: "留下來本身就是勇氣",
-      learnContent: "你不需要完美才能重要。"
-    }
+    house: "Gryffindor",
+    analysis: "你重視友情，善於用幽默化解緊張。雖然有時不自信，但你總是在朋友最需要時留下來。"
+  },
+  ginny: {
+    name: "Ginny Weasley",
+    house: "Gryffindor",
+    analysis: "你勇敢而真誠，情感強烈但不軟弱。你願意為愛與信念奮力一搏。"
+  },
+  draco: {
+    name: "Draco Malfoy",
+    house: "Slytherin",
+    analysis: "你有強烈的自我意識與防衛心，重視地位與尊嚴。你習慣精密計算，其實內心比外表脆弱。"
   },
   luna: {
     name: "Luna Lovegood",
-    house: "ravenclaw",
-    houseImage: "images/ravenclaw.png",
-    image: "images/luna.png",
-    analysis: {
-      role: "價值觀提醒者",
-      personality: "獨特、不迎合主流。",
-      inside: "對自我非常篤定。",
-      learnTitle: "忠於自己",
-      learnContent: "你不需要被所有人理解。"
-    }
+    house: "Ravenclaw",
+    analysis: "你忠於自我、不迎合主流。你用獨特視角看世界，即使不被理解，也依然堅定。"
   },
   hagrid: {
     name: "Rubeus Hagrid",
-    house: "hufflepuff",
-    houseImage: "images/hufflepuff.png",
-    image: "images/hagrid.png",
-    analysis: {
-      role: "守護者",
-      personality: "溫暖、善良。",
-      inside: "害怕傷害他人。",
-      learnTitle: "溫柔是力量",
-      learnContent: "選擇善良本身就很強大。"
-    }
+    house: "Hufflepuff",
+    analysis: "你溫暖善良，總是想保護他人。你相信每個人都值得被善待。"
+  },
+  fredgeorge: {
+    name: "Fred & George Weasley",
+    house: "Gryffindor",
+    analysis: "你用幽默對抗壓力，讓身邊的人感到輕鬆。你看似玩世不恭，其實非常重情義。"
+  },
+  sirius: {
+    name: "Sirius Black",
+    house: "Gryffindor",
+    analysis: "你追求自由，不喜歡被規則束縛。你重視情感，為在乎的人可以不顧一切。"
+  },
+  snape: {
+    name: "Severus Snape",
+    house: "Slytherin",
+    analysis: "你情感深沉、極度忠誠。你不輕易表露真心，但一旦承諾，就會默默承擔到底。"
+  },
+  dumbledore: {
+    name: "Albus Dumbledore",
+    house: "Gryffindor",
+    analysis: "你重視智慧與長遠布局，擅長觀察人性。你知道力量的危險，因此選擇節制。"
+  },
+  voldemort: {
+    name: "Lord Voldemort",
+    house: "Slytherin",
+    analysis: "你極度追求掌控與力量，害怕失去。你渴望不被忽視，但選擇了極端的方式。"
   }
 };
 
-// =======================
-// 測驗頁
-// =======================
-const quizForm = document.getElementById("quizForm");
 const submitBtn = document.getElementById("submitBtn");
+const quizForm = document.getElementById("quizForm");
 
-if (quizForm && submitBtn) {
-  submitBtn.addEventListener("click", () => {
-    const formData = new FormData(quizForm);
+submitBtn.addEventListener("click", () => {
+  const formData = new FormData(quizForm);
+  const scores = {};
 
-    const rawCharacterScores = {};
-    const houseScores = {};
-
-    for (let value of formData.values()) {
-      value.split(",").forEach(key => {
-        key = key.trim();
-
-        // 記錄所有角色（包含沒寫分析的）
-        rawCharacterScores[key] = (rawCharacterScores[key] || 0) + 1;
-
-        // 記錄學院
-        if (["gryffindor", "ravenclaw", "hufflepuff", "slytherin"].includes(key)) {
-          houseScores[key] = (houseScores[key] || 0) + 1;
-        }
-      });
-    }
-
-    // 只留下「有分析內容的角色」
-    const validCharacterScores = {};
-    Object.keys(rawCharacterScores).forEach(key => {
-      if (characters[key]) {
-        validCharacterScores[key] = rawCharacterScores[key];
-      }
+  for (let value of formData.values()) {
+    value.split(",").forEach(key => {
+      scores[key] = (scores[key] || 0) + 1;
     });
-
-    let finalCharacterKey = null;
-
-    if (Object.keys(validCharacterScores).length > 0) {
-      finalCharacterKey = Object.keys(validCharacterScores)
-        .reduce((a, b) =>
-          validCharacterScores[a] > validCharacterScores[b] ? a : b
-        );
-    } else {
-      // 沒任何角色 → 用學院兜底
-      const topHouse = Object.keys(houseScores)
-        .reduce((a, b) => houseScores[a] > houseScores[b] ? a : b);
-
-      const fallbackMap = {
-        gryffindor: "harry",
-        ravenclaw: "luna",
-        hufflepuff: "hagrid",
-        slytherin: "harry" // 沒寫 Snape / Draco 時的安全備用
-      };
-
-      finalCharacterKey = fallbackMap[topHouse];
-    }
-
-    localStorage.setItem("hpCharacter", finalCharacterKey);
-    window.location.href = "result.html";
-  });
-}
-
-// =======================
-// 結果頁
-// =======================
-const resultContainer = document.getElementById("characterResult");
-
-if (resultContainer) {
-  const key = localStorage.getItem("hpCharacter");
-  const c = characters[key];
-
-  if (!c) {
-    resultContainer.innerHTML = "<p>結果異常，但不是你的錯。</p>";
-    return;
   }
 
-  resultContainer.innerHTML = `
-    <img src="${c.houseImage}" style="max-width:200px;">
-    <h2>${c.name}</h2>
-    <img src="${c.image}" style="max-width:300px;border-radius:16px;">
-    <div class="card"><strong>團體角色</strong><p>${c.analysis.role}</p></div>
-    <div class="card"><strong>外在表現</strong><p>${c.analysis.personality}</p></div>
-    <div class="card"><strong>內在狀態</strong><p>${c.analysis.inside}</p></div>
-    <div class="card highlight">
-      <strong>${c.analysis.learnTitle}</strong>
-      <p>${c.analysis.learnContent}</p>
-    </div>
-  `;
-}
+  const resultKey = Object.keys(scores).reduce((a, b) =>
+    scores[a] > scores[b] ? a : b
+  );
+
+  localStorage.setItem("hpResult", resultKey);
+  window.location.href = "result.html";
+});
