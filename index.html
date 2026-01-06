@@ -1,25 +1,86 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>Harry Potter Character Quiz</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音樂靈魂測驗：你適合聽誰的歌？</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <div id="quiz-page">
+            <h1>🎵 音樂靈魂測驗</h1>
+            <p>回答 7 個問題，找出最適合你當前心情的歌手！</p>
+            <form id="quizForm">
+                <div class="question">
+                    <p>1. 週末下午，你通常喜歡做什麼？</p>
+                    <label><input type="radio" name="q1" value="taylor,shawn"> 跟好朋友聚在一起聊天</label>
+                    <label><input type="radio" name="q1" value="billie,olivia"> 窩在房間裡畫畫或寫日記</label>
+                    <label><input type="radio" name="q1" value="justin,sabrina"> 出去逛街或看場熱鬧的表演</label>
+                    <label><input type="radio" name="q1" value="ed,gracie"> 在咖啡廳靜靜看書</label>
+                </div>
 
-  <div class="container">
-    <header class="hero">
-      <div class="hero-text">
-        <h1>Which Harry Potter Character Are You?</h1>
-        <p>探索你的團體角色、學院、個性，以及你可以向哪個角色看齊</p>
-        <a href="quiz.html" class="start-btn">Let's Go!!!</a>
-      </div>
+                <div class="question">
+                    <p>2. 面對失戀或心情低落時，你會？</p>
+                    <label><input type="radio" name="q2" value="olivia,gracie"> 把所有情緒哭出來，聽心碎的情歌</label>
+                    <label><input type="radio" name="q2" value="billie"> 沉浸在黑暗氛圍中感受孤獨</label>
+                    <label><input type="radio" name="q2" value="sabrina,justin"> 聽輕快的歌，讓自己趕快好起來</label>
+                    <label><input type="radio" name="q2" value="taylor,shawn"> 寫下自己的感受或跟人訴苦</label>
+                </div>
 
-      <div class="hero-image">
-        <img src="images/hogwarts.png" alt="Hogwarts">
-      </div>
-    </header>
-  </div>
+                <div class="question">
+                    <p>3. 你最喜歡哪種顏色氛圍？</p>
+                    <label><input type="radio" name="q3" value="billie"> 深沉的墨綠或黑色</label>
+                    <label><input type="radio" name="q3" value="sabrina,olivia"> 亮眼的粉色或紫色</label>
+                    <label><input type="radio" name="q3" value="ed,shawn"> 溫暖的土色或木質感</label>
+                    <label><input type="radio" name="q3" value="taylor"> 多彩且閃閃發光的顏色</label>
+                </div>
 
+                <div class="question">
+                    <p>4. 你的穿衣風格比較接近？</p>
+                    <label><input type="radio" name="q4" value="justin,sabrina"> 時尚、流行且充滿自信</label>
+                    <label><input type="radio" name="q4" value="ed,shawn"> 簡單舒適的帽 T 或襯衫</label>
+                    <label><input type="radio" name="q4" value="billie"> 寬鬆、有個性且與眾不同</label>
+                    <label><input type="radio" name="q4" value="taylor,gracie"> 優雅或帶點復古的感覺</label>
+                </div>
+
+                <div class="question">
+                    <p>5. 你理想的約會地點是？</p>
+                    <label><input type="radio" name="q5" value="ed,shawn"> 傍晚的海邊散步</label>
+                    <label><input type="radio" name="q5" value="justin,sabrina"> 充滿音樂的遊樂園</label>
+                    <label><input type="radio" name="q5" value="olivia,gracie"> 懷舊的黑膠唱片行</label>
+                    <label><input type="radio" name="q5" value="taylor"> 一場盛大的演唱會</label>
+                </div>
+
+                <div class="question">
+                    <p>6. 你如何看待「過去」？</p>
+                    <label><input type="radio" name="q6" value="taylor,olivia"> 它是我的創作靈感與成長動力</label>
+                    <label><input type="radio" name="q6" value="gracie,ed"> 雖然感傷，但都是美好的回憶</label>
+                    <label><input type="radio" name="q6" value="billie"> 有點混亂，但我不想假裝它很完美</label>
+                    <label><input type="radio" name="q6" value="justin,shawn"> 專注現在，過去就讓它過去</label>
+                </div>
+
+                <div class="question">
+                    <p>7. 朋友覺得你最迷人的地方是？</p>
+                    <label><input type="radio" name="q7" value="sabrina,justin"> 幽默感與陽光般的能量</label>
+                    <label><input type="radio" name="q7" value="taylor,shawn"> 說故事的能力與真誠</label>
+                    <label><input type="radio" name="q7" value="billie,olivia"> 獨特的品味與真性情</label>
+                    <label><input type="radio" name="q7" value="ed,gracie"> 溫暖、安靜且懂得傾聽</label>
+                </div>
+
+                <button type="button" id="submitBtn">看看我的專屬歌手</button>
+            </form>
+        </div>
+
+        <div id="result-page" class="hidden">
+            <h1>你的專屬歌手是...</h1>
+            <div class="result-box">
+                <h2 id="artist-name"></h2>
+                <p id="artist-desc"></p>
+            </div>
+            <button onclick="location.reload()">重新測驗</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
