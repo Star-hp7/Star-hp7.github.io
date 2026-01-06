@@ -2,19 +2,31 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>測驗結果</title>
+  <title>Quiz Result</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container" id="resultContainer">
-  <h1>你的角色結果</h1>
-
-  <div id="characterResult"></div>
-
-  <a href="quiz.html" class="start-btn">重新測驗</a>
-</div>
+<div class="container" id="result"></div>
 
 <script src="quiz.js"></script>
+<script>
+  const key = localStorage.getItem("hpResult");
+  const character = characters[key];
+
+  const resultDiv = document.getElementById("result");
+
+  if (!character) {
+    resultDiv.innerHTML = "<h2>結果載入失敗，但不是你的錯。</h2>";
+  } else {
+    resultDiv.innerHTML = `
+      <h1>你最像的角色是：</h1>
+      <h2>${character.name}</h2>
+      <h3>學院：${character.house}</h3>
+      <p>${character.analysis}</p>
+    `;
+  }
+</script>
+
 </body>
 </html>
