@@ -1,4 +1,4 @@
-// 將資料放在最外面，確保全域可存取
+// 1. 定義所有可能的結果資料
 const characters = {
   harry: { name: "Harry Potter", analysis: "勇敢、重情義，會在關鍵時刻挺身而出。" },
   hermione: { name: "Hermione Granger", analysis: "理性努力，重視知識與責任。" },
@@ -12,58 +12,67 @@ const characters = {
   snape: { name: "Severus Snape", analysis: "情感深沉，極度忠誠。" },
   dumbledore: { name: "Albus Dumbledore", analysis: "智慧而謹慎，擅長長遠布局。" },
   voldemort: { name: "Voldemort", analysis: "追求掌控與力量，害怕失去。" },
-  // 加入學院選項的基礎分析，避免出錯
-  gryffindor: { name: "Gryffindor 學院", analysis: "你擁有獅子般的勇氣與膽量！" },
-  ravenclaw: { name: "Ravenclaw 學院", analysis: "你的智慧與睿智讓你出類拔萃。" },
-  hufflepuff: { name: "Hufflepuff 學院", analysis: "正直、忠誠且勤奮是你的座右銘。" },
-  slytherin: { name: "Slytherin 學院", analysis: "野心勃勃且精明，你總能達成目標。" }
+  gryffindor: { name: "葛萊分多學院", analysis: "你擁有獅子般的勇氣、大膽與騎士精神！" },
+  ravenclaw: { name: "雷文克勞學院", analysis: "智慧、好學與睿智是你的代名詞。" },
+  hufflepuff: { name: "赫夫帕夫學院", analysis: "正直、忠誠且勤奮工作的你，是最可靠的夥伴。" },
+  slytherin: { name: "史萊哲林學院", analysis: "野心勃勃、精明且重視榮譽，你總能達成目標。" }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const submitBtn = document.getElementById("submitBtn");
   const quizForm = document.getElementById("quizForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const resultDiv = document.getElementById("result");
 
-  // 只有在有按鈕的頁面（quiz.html）才執行這段
+  // --- 頁面邏輯 A：題目卷頁面 (quiz.html) ---
   if (submitBtn && quizForm) {
     submitBtn.addEventListener("click", () => {
       const formData = new FormData(quizForm);
       const scores = {};
-      let questionCount = 0;
+      let count = 0;
 
+      // 遍歷所有選中的選項
       for (let value of formData.values()) {
-        questionCount++;
-        value.split(",").forEach(key => {
+        count++;
+        // 核心功能：支援 value="harry,gryffindor" 這種多重權重
+        const tags = value.split(","); 
+        tags.forEach(tag => {
+          const key = tag.trim();
           scores[key] = (scores[key] || 0) + 1;
         });
       }
 
-      // 檢查是否所有題目都做了（總共 10 題）
-      if (questionCount < 10) {
-        alert("還有題目沒寫完喔！請填滿 10 個問題 🙃");
+      if (count < 10) {
+        alert("還沒寫完喔！請填滿 10 題再送出 🙃");
         return;
       }
 
+      // 計算得分最高的 Key
       const resultKey = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-
+      
+      // 存入瀏覽器快取並跳轉
       localStorage.setItem("hpResult", resultKey);
       window.location.href = "result.html";
     });
   }
 
-  // 如果是在結果頁面
-  const resultDiv = document.getElementById("result");
+  // --- 頁面邏輯 B：結果頁面 (result.html) ---
   if (resultDiv) {
     const key = localStorage.getItem("hpResult");
-    if (!key || !characters[key]) {
-      resultDiv.innerHTML = "<h2>結果讀取失敗，快回去重測一次！</h2><a href='quiz.html' class='start-btn'>返回測試</a>";
+    
+    if (key && characters[key]) {
+      resultDiv.innerHTML = `
+        <div class="result-card">
+          <h1>測驗結果</h1>
+          <h2 style="font-size: 2.5rem; color: #ffd700;">${characters[key].name}</h2>
+          <p style="font-size: 1.2rem; line-height: 1.6; margin: 20px 0;">${characters[key].analysis}</p>
+          <a href="quiz.html" class="btn">再測一次</a>
+        </div>
+      `;
     } else {
       resultDiv.innerHTML = `
-        <h1>你的測驗結果</h1>
-        <div class="result-card">
-          <h2 class="character-name">${characters[key].name}</h2>
-          <p class="analysis">${characters[key].analysis}</p>
-        </div>
-        <a href="quiz.html" class="start-btn">再測一次</a>
+        <h1>哎呀！</h1>
+        <p>找不到測驗資料，請重新測試一次。</p>
+        <a href="quiz.html" class="btn">回到首頁</a>
       `;
     }
   }
