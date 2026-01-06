@@ -1,44 +1,134 @@
+/* 基本設定 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1db954, #191414);
-    color: white;
+    font-family: 'PingFang TC', 'Microsoft JhengHei', 'Segoe UI', sans-serif;
+    /* 背景改為深藍色到深紫色的漸層 */
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #f0f0f0;
     display: flex;
     justify-content: center;
     min-height: 100vh;
     margin: 0;
     padding: 20px;
 }
+
+/* 內容容器 */
 .container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05); /* 半透明背景 */
+    backdrop-filter: blur(15px); /* 毛玻璃效果 */
     max-width: 600px;
     width: 100%;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-h1 { text-align: center; color: #1db954; }
-.question { margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; }
-label { display: block; margin: 12px 0; cursor: pointer; transition: 0.3s; }
-label:hover { color: #1db954; transform: translateX(5px); }
+
+/* 標題設定 */
+h1 {
+    text-align: center;
+    color: #4facfe; /* 天藍色 */
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+/* 題目區塊 */
+.question {
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.question:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.question p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0;
+    color: #00f2fe; /* 亮藍色 */
+}
+
+/* 選項標籤 */
+label {
+    display: block;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid transparent;
+}
+
+label:hover {
+    background: rgba(79, 172, 254, 0.2);
+    border-color: #4facfe;
+    transform: translateX(8px);
+}
+
+/* 隱藏原生單選按鈕，並美化間距 */
+input[type="radio"] {
+    margin-right: 12px;
+}
+
+/* 按鈕設定 */
 button {
     width: 100%;
-    padding: 15px;
-    background: #1db954;
-    color: white;
+    padding: 18px;
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    color: #002f4b; /* 深藍色文字，對比更高 */
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 800;
     cursor: pointer;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+    transition: 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+    filter: brightness(1.1);
+}
+
+/* 結果頁面樣式 */
+.hidden {
+    display: none;
+}
+
+#result-page {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+.result-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #4facfe;
+    padding: 40px 20px;
+    border-radius: 20px;
+    margin: 25px 0;
+}
+
+#artist-name {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(79, 172, 254, 0.8);
+    margin: 0;
+}
+
+#artist-desc {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #d1d1d1;
     margin-top: 20px;
 }
-button:hover { background: #1ed760; scale: 1.02; }
-.hidden { display: none; }
-.result-box {
-    text-align: center;
-    border: 2px solid #1db954;
-    padding: 30px;
-    border-radius: 15px;
-    margin: 20px 0;
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
