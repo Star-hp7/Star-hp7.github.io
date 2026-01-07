@@ -86,4 +86,3 @@ if (resultDiv) {
     <p>${c.analysis.learnContent}</p>
   ` : "<p>沒有結果</p>";
 }
-
