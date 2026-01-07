@@ -2,7 +2,7 @@
 const characters = {
     // 角色特質與學習建議
     harry: { name: "Harry Potter", house: "Gryffindor", analysis: "勇敢、重情義，會在關鍵時刻挺身而出。", learn: "學習如何在巨大的壓力下依然保持良知與道德勇氣。" },
-    hermione: { name: "Hermione", house: "Ravenclaw/Gryffindor", analysis: "理性努力，重視知識與責任，是團隊的腦袋。", learn: "學習如何將書本知識轉化為解決現實問題的行動力。" },
+    hermione: { name: "Hermione Granger", house: "Ravenclaw/Gryffindor", analysis: "理性努力，重視知識與責任，是團隊的腦袋。", learn: "學習如何將書本知識轉化為解決現實問題的行動力。" },
     ron: { name: "Ron Weasley", house: "Gryffindor", analysis: "幽默溫暖，是朋友間最強大的情緒支柱。", learn: "學習在才華橫溢的朋友身邊，依然找到並肯定自己的價值。" },
     draco: { name: "Draco Malfoy", house: "Slytherin", analysis: "重視尊嚴與地位，擅長計算與自我保護。", learn: "學習如何在家族期待與內心正義之間做出正確的抉擇。" },
     luna: { name: "Luna Lovegood", house: "Ravenclaw", analysis: "忠於自我，擁有獨特且不被動搖的世界觀。", learn: "學習不在意他人的目光，優雅地擁抱自己的獨特性。" },
