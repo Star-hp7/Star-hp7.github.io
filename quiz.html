@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Harry Potter Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>選擇最符合你的選項</h1>
+
+  <form id="quizForm">
+
+    <div class="question">
+      <h2>1. 如果朋友遇到困難，你會怎麼做？</h2>
+      <label><input type="radio" name="q1" value="harry"> 立刻行動幫忙</label>
+      <label><input type="radio" name="q1" value="hermione"> 分析後再行動</label>
+      <label><input type="radio" name="q1" value="ron"> 陪在旁邊支持</label>
+      <label><input type="radio" name="q1" value="hagrid"> 用溫暖方式保護</label>
+    </div>
+
+    <div class="question">
+      <h2>2. 你在團體中比較像？</h2>
+      <label><input type="radio" name="q2" value="hermione"> 智囊型</label>
+      <label><input type="radio" name="q2" value="fredgeorge"> 氣氛製造者</label>
+      <label><input type="radio" name="q2" value="draco"> 防禦型 / 衝突者</label>
+      <label><input type="radio" name="q2" value="luna"> 不同觀點提供者</label>
+    </div>
+
+    <div class="question">
+      <h2>3. 面對壓力時你會？</h2>
+      <label><input type="radio" name="q3" value="harry"> 先做再說</label>
+      <label><input type="radio" name="q3" value="snape"> 默默承受</label>
+      <label><input type="radio" name="q3" value="sirius"> 想逃離束縛</label>
+      <label><input type="radio" name="q3" value="draco"> 先築起防線</label>
+    </div>
+
+    <button type="button" id="submitBtn">看結果</button>
+  </form>
+</div>
+
+<script src="quiz.js"></script>
+</body>
+</html>
 
