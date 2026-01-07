@@ -1,88 +1,79 @@
+// 1. 定義所有可能的結果資料
 const characters = {
-  harry:{
-    name:"Harry Potter",
-    house:"Gryffindor",
-    houseImage:"images/gryffindor.png",
-    image:"images/harry.png",
-    analysis:{
-      role:"團體中的行動核心",
-      personality:"衝動但重情重義",
-      inside:"即使害怕仍選擇站出來",
-      learnTitle:"在恐懼中仍選擇行動",
-      learnContent:"你可以學習在不安時仍勇敢踏出一步。"
-    }
-  },
-  hermione:{
-    name:"Hermione Granger",
-    house:"Gryffindor",
-    houseImage:"images/gryffindor.png",
-    image:"images/hermione.png",
-    analysis:{
-      role:"智囊型角色",
-      personality:"理性、努力",
-      inside:"對自己要求極高",
-      learnTitle:"相信自己的價值",
-      learnContent:"不要因為背景而低估自己。"
-    }
-  },
-  draco:{
-    name:"Draco Malfoy",
-    house:"Slytherin",
-    houseImage:"images/slytherin.png",
-    image:"images/draco.png",
-    analysis:{
-      role:"防禦型 / 衝突者",
-      personality:"外表強硬",
-      inside:"其實充滿不安",
-      learnTitle:"承認恐懼不是弱點",
-      learnContent:"面對內心比攻擊他人更重要。"
-    }
-  }
+  harry: { name: "Harry Potter", analysis: "勇敢、重情義，會在關鍵時刻挺身而出。" },
+  hermione: { name: "Hermione Granger", analysis: "理性努力，重視知識與責任。" },
+  ron: { name: "Ron Weasley", analysis: "幽默溫暖，是朋友間的情緒支柱。" },
+  ginny: { name: "Ginny Weasley", analysis: "真誠勇敢，情感強烈。" },
+  draco: { name: "Draco Malfoy", analysis: "重視尊嚴與地位，擅長計算與自我保護。" },
+  luna: { name: "Luna Lovegood", analysis: "忠於自我，擁有獨特世界觀。" },
+  hagrid: { name: "Hagrid", analysis: "善良溫暖，願意保護弱小。" },
+  fredgeorge: { name: "Fred & George", analysis: "用幽默對抗壓力，重情義。" },
+  sirius: { name: "Sirius Black", analysis: "追求自由，不受規則束縛。" },
+  snape: { name: "Severus Snape", analysis: "情感深沉，極度忠誠。" },
+  dumbledore: { name: "Albus Dumbledore", analysis: "智慧而謹慎，擅長長遠布局。" },
+  voldemort: { name: "Voldemort", analysis: "追求掌控與力量，害怕失去。" },
+  gryffindor: { name: "葛萊分多學院", analysis: "你擁有獅子般的勇氣、大膽與騎士精神！" },
+  ravenclaw: { name: "雷文克勞學院", analysis: "智慧、好學與睿智是你的代名詞。" },
+  hufflepuff: { name: "赫夫帕夫學院", analysis: "正直、忠誠且勤奮工作的你，是最可靠的夥伴。" },
+  slytherin: { name: "史萊哲林學院", analysis: "野心勃勃、精明且重視榮譽，你總能達成目標。" }
 };
 
-// ===== 測驗頁 =====
-const quizForm = document.getElementById("quizForm");
-const submitBtn = document.getElementById("submitBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const quizForm = document.getElementById("quizForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const resultDiv = document.getElementById("result");
 
-if (quizForm && submitBtn) {
-  submitBtn.addEventListener("click", () => {
-    const formData = new FormData(quizForm);
-    const scores = {};
+  // --- 頁面邏輯 A：題目卷頁面 (quiz.html) ---
+  if (submitBtn && quizForm) {
+    submitBtn.addEventListener("click", () => {
+      const formData = new FormData(quizForm);
+      const scores = {};
+      let count = 0;
 
-    for (let v of formData.values()) {
-      scores[v] = (scores[v] || 0) + 1;
+      // 遍歷所有選中的選項
+      for (let value of formData.values()) {
+        count++;
+        // 核心功能：支援 value="harry,gryffindor" 這種多重權重
+        const tags = value.split(","); 
+        tags.forEach(tag => {
+          const key = tag.trim();
+          scores[key] = (scores[key] || 0) + 1;
+        });
+      }
+
+      if (count < 10) {
+        alert("還沒寫完喔！請填滿 10 題再送出 🙃");
+        return;
+      }
+
+      // 計算得分最高的 Key
+      const resultKey = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+      
+      // 存入瀏覽器快取並跳轉
+      localStorage.setItem("hpResult", resultKey);
+      window.location.href = "result.html";
+    });
+  }
+
+  // --- 頁面邏輯 B：結果頁面 (result.html) ---
+  if (resultDiv) {
+    const key = localStorage.getItem("hpResult");
+    
+    if (key && characters[key]) {
+      resultDiv.innerHTML = `
+        <div class="result-card">
+          <h1>測驗結果</h1>
+          <h2 style="font-size: 2.5rem; color: #ffd700;">${characters[key].name}</h2>
+          <p style="font-size: 1.2rem; line-height: 1.6; margin: 20px 0;">${characters[key].analysis}</p>
+          <a href="quiz.html" class="btn">再測一次</a>
+        </div>
+      `;
+    } else {
+      resultDiv.innerHTML = `
+        <h1>哎呀！</h1>
+        <p>找不到測驗資料，請重新測試一次。</p>
+        <a href="quiz.html" class="btn">回到首頁</a>
+      `;
     }
-
-    if (Object.keys(scores).length === 0) {
-      alert("至少選一題啦 🙃");
-      return;
-    }
-
-    const resultKey = Object.keys(scores)
-      .reduce((a,b)=> scores[a]>scores[b]?a:b);
-
-    localStorage.setItem("hpResult", resultKey);
-    window.location.href = "result.html";
-  });
-}
-
-// ===== 結果頁 =====
-const resultDiv = document.getElementById("characterResult");
-if (resultDiv) {
-  const key = localStorage.getItem("hpResult");
-  const c = characters[key];
-
-  resultDiv.innerHTML = c ? `
-    <img src="${c.houseImage}" class="house-img">
-    <h2>${c.name}</h2>
-    <img src="${c.image}" class="char-img">
-
-    <p><strong>團體角色：</strong>${c.analysis.role}</p>
-    <p><strong>外在性格：</strong>${c.analysis.personality}</p>
-    <p><strong>內在狀態：</strong>${c.analysis.inside}</p>
-
-    <h3>你可以向他學習：</h3>
-    <p>➜ ${c.analysis.learnTitle}</p>
-    <p>${c.analysis.learnContent}</p>
-  ` : "<p>沒有結果</p>";
-}
+  }
+});
