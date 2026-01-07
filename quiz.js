@@ -1,18 +1,18 @@
 // 1. 定義角色資料與學院資料
 const characters = {
     // 角色特質與學習建議
-    harry: { name: "哈利·波特", house: "葛萊分多", analysis: "勇敢、重情義，會在關鍵時刻挺身而出。", learn: "學習如何在巨大的壓力下依然保持良知與道德勇氣。" },
-    hermione: { name: "妙麗·格蘭傑", house: "雷文克勞特質/葛萊分多", analysis: "理性努力，重視知識與責任，是團隊的腦袋。", learn: "學習如何將書本知識轉化為解決現實問題的行動力。" },
-    ron: { name: "榮恩·衛斯理", house: "葛萊分多", analysis: "幽默溫暖，是朋友間最強大的情緒支柱。", learn: "學習在才華橫溢的朋友身邊，依然找到並肯定自己的價值。" },
-    draco: { name: "德拉科·馬份", house: "史萊哲林", analysis: "重視尊嚴與地位，擅長計算與自我保護。", learn: "學習如何在家族期待與內心正義之間做出正確的抉擇。" },
-    luna: { name: "露娜·羅古德", house: "雷文克勞", analysis: "忠於自我，擁有獨特且不被動搖的世界觀。", learn: "學習不在意他人的目光，優雅地擁抱自己的獨特性。" },
-    snape: { name: "賽佛勒斯·石內卜", house: "史萊哲林", analysis: "情感深沉且極度忠誠，隱忍而強大。", learn: "學習如何保護深愛的事物，即便這需要付出極大的自我犧牲。" },
+    harry: { name: "Harry Potter", house: "Gryffindor", analysis: "勇敢、重情義，會在關鍵時刻挺身而出。", learn: "學習如何在巨大的壓力下依然保持良知與道德勇氣。" },
+    hermione: { name: "Hermione", house: "Ravenclaw/Gryffindor", analysis: "理性努力，重視知識與責任，是團隊的腦袋。", learn: "學習如何將書本知識轉化為解決現實問題的行動力。" },
+    ron: { name: "Ron Weasley", house: "Gryffindor", analysis: "幽默溫暖，是朋友間最強大的情緒支柱。", learn: "學習在才華橫溢的朋友身邊，依然找到並肯定自己的價值。" },
+    draco: { name: "Draco Malfoy", house: "Slytherin", analysis: "重視尊嚴與地位，擅長計算與自我保護。", learn: "學習如何在家族期待與內心正義之間做出正確的抉擇。" },
+    luna: { name: "Luna Lovegood", house: "Ravenclaw", analysis: "忠於自我，擁有獨特且不被動搖的世界觀。", learn: "學習不在意他人的目光，優雅地擁抱自己的獨特性。" },
+    snape: { name: "Severus Snape", house: "Slytherin", analysis: "情感深沉且極度忠誠，隱忍而強大。", learn: "學習如何保護深愛的事物，即便這需要付出極大的自我犧牲。" },
     
     // 學院特質
-    gryffindor: { name: "葛萊分多學院", analysis: "勇氣、膽量、神經和騎士精神。", learn: "英雄主義並非盲目衝動，而是明知恐懼卻仍選擇前行。" },
-    ravenclaw: { name: "雷文克勞學院", analysis: "智慧、學識與睿智。", learn: "真正的聰明是保持好奇心，並永遠尊重客觀的事實。" },
-    hufflepuff: { name: "赫夫帕夫學院", analysis: "正直、忠誠、勤奮與不畏艱辛。", learn: "平凡中的堅持才是最不平凡的力量，友誼比競爭更重要。" },
-    slytherin: { name: "史萊哲林學院", analysis: "雄心、精明與強大的領導力。", learn: "善用資源與謀略來達成目標，並學會保護你所珍視的人。" }
+    gryffindor: { name: "Gryffindor 葛萊分多學院", analysis: "勇氣、膽量、神經和騎士精神。", learn: "英雄主義並非盲目衝動，而是明知恐懼卻仍選擇前行。" },
+    ravenclaw: { name: "Ravenclaw 雷文克勞學院", analysis: "智慧、學識與睿智。", learn: "真正的聰明是保持好奇心，並永遠尊重客觀的事實。" },
+    hufflepuff: { name: "Hufflepuff 赫夫帕夫學院", analysis: "正直、忠誠、勤奮與不畏艱辛。", learn: "平凡中的堅持才是最不平凡的力量，友誼比競爭更重要。" },
+    slytherin: { name: "Slytherin 史萊哲林學院", analysis: "雄心、精明與強大的領導力。", learn: "善用資源與謀略來達成目標，並學會保護你所珍視的人。" }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
